@@ -1,0 +1,19 @@
+services:
+  php:
+    build: .
+    volumes:
+      - ./:/var/www/html
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      - ./:/app:delegated
+    ports:
+      - '8000:80'
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+  mysql:
+    build: .
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+

@@ -1,0 +1,87 @@
+############################
+# SYSTEM FILES
+############################
+.DS_Store
+Thumbs.db
+
+############################
+# IDE / EDITOR
+############################
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+############################
+# COMPOSER
+############################
+/vendor/
+
+############################
+# ENV FILES
+############################
+.env
+.env.*
+!.env.example
+
+############################
+# YII2 RUNTIME & CACHE
+############################
+/runtime/*
+/web/assets/*
+/backend/runtime/*
+/backend/web/assets/*
+/frontend/runtime/*
+/frontend/web/assets/*
+/console/runtime/*
+
+############################
+# LOGS
+############################
+*.log
+
+############################
+# UPLOADS (if any)
+############################
+/uploads/*
+/web/uploads/*
+/backend/web/uploads/*
+/frontend/web/uploads/*
+
+############################
+# DATABASE
+############################
+*.sql
+*.sqlite
+
+############################
+# DOCKER
+############################
+docker-compose.override.yml
+.env.docker
+docker-data/
+mysql-data/
+*.pid
+
+############################
+# NODE (if using frontend build)
+############################
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+############################
+# TESTING
+############################
+/tests/_output/
+/tests/_data/
+
+############################
+# MISC
+############################
+*.bak
+*.swp
+*.tmp
