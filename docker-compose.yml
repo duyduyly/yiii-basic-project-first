@@ -7,13 +7,14 @@ services:
       - ./:/app:delegated
     ports:
       - '8000:80'
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     env_file:
       - .env
-    depends_on:
-      - mysql
-  mysql:
-    build: .
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_DATABASE: ${DB_NAME}
 
