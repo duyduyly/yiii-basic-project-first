@@ -55,6 +55,7 @@ $config = [
                 'auth/logout' => 'auth/auth/logout',
                 'student' => 'student/student/index',
                 'student/index' => 'student/student/index',
+                'clazz/index' => 'clazz/clazz/index',
             ],
         ],
     ],
@@ -64,6 +65,9 @@ $config = [
         ],
         'student' => [
             'class' => 'modules\\student\\Module',
+        ],
+        'clazz' => [
+	        'class' => 'modules\\clazz\\Module',
         ],
     ],
     'params' => $params,
