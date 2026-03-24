@@ -31,6 +31,10 @@ RUN printf '\n<Directory /var/www/html/apps>\n    Options Indexes FollowSymLinks
  && a2enconf app-roots
 
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+
+RUN apt-get update && apt-get install -y dos2unix \
+ && dos2unix /usr/local/bin/entrypoint.sh
+
 RUN chmod +x /usr/local/bin/entrypoint.sh \
  && chown -R www-data:www-data /var/www/html
 
