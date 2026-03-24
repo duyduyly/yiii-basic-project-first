@@ -84,21 +84,24 @@ http://localhost/basic/web/
 
 ### Install with Docker
 
-Update your vendor packages
+Build images and start both apps:
 
-    docker-compose run --rm php composer update --prefer-dist
-    
-Run the installation triggers (creating cookie validation code)
+```bash
+docker compose up --build -d
+```
 
-    docker-compose run --rm php composer install    
-    
-Start the container
+If dependencies are not installed yet, run once (optional, entrypoint also auto-installs when missing):
 
-    docker-compose up -d
-    
-You can then access the application through the following URL:
+```bash
+docker compose run --rm web composer install
+```
 
-    http://127.0.0.1:8000
+Application URLs:
+
+- Web app: `http://localhost:8080`
+- Admin app: `http://localhost:8081`
+
+The compose file mounts source code and keeps dependencies in the named `vendor` volume.
 
 **NOTES:** 
 - Minimum required Docker engine version `17.04` for development (see [Performance tuning for volume mounts](https://docs.docker.com/docker-for-mac/osxfs-caching/))

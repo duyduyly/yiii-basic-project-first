@@ -19,23 +19,20 @@ RUN curl -sS https://getcomposer.org/installer | php \
  && mv composer.phar /usr/local/bin/composer \
  && chmod +x /usr/local/bin/composer
 
-# Apache config
-RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/web|g' /etc/apache2/sites-available/000-default.conf
-
-RUN printf '\n\
-<Directory /var/www/html/web>\n\
-    Options Indexes FollowSymLinks\n\
-    AllowOverride All\n\
-    Require all granted\n\
-</Directory>\n\
-' >> /etc/apache2/apache2.conf
-
 WORKDIR /var/www/html
 
 COPY composer.json composer.lock ./
-
-RUN composer install --no-interaction --prefer-dist
+RUN composer install --no-interaction --prefer-dist --no-scripts
 
 COPY . .
 
-RUN chown -R www-data:www-data /var/www/html
+# Allow .htaccess under app public roots.
+RUN printf '\n<Directory /var/www/html/apps>\n    Options Indexes FollowSymLinks\n    AllowOverride All\n    Require all granted\n</Directory>\n' > /etc/apache2/conf-available/app-roots.conf \
+ && a2enconf app-roots
+
+COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh \
+ && chown -R www-data:www-data /var/www/html
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+CMD ["apache2-foreground"]
